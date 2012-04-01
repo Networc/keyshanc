@@ -1,0 +1,10 @@
+Thumbs.db
+.DS_Store
+
+!.gitkeep
+
+*~
+*.swp
+
+.rbenv-version
+.rvmrc
