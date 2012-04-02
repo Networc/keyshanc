@@ -13,8 +13,9 @@ Further discussion of Keyshanc will be found on my blog at [Andrew C. Reed](http
 
 * Keyshanc:
     1. The Keyshanc algorithm, or
-    2. The password supplied to the algorithm (e.g. "What's your Keyshanc?" "I'm not telling you!")
-* Keyshanc-enabled: Hardware or software that uses the Keyshanc algorithm to encrypt/decrypt keystrokes.
+    2. The password supplied to the algorithm (e.g. "What's your Keyshanc?" "I'm not telling you!"), or
+    3. A small device that, when inserted between a keyboard and computer, will encrypt keystrokes according to the Keyshanc algorithm
+* Keyshanc-enabled: Hardware or software that uses the Keyshanc algorithm to encrypt/decrypt keystrokes (this usage is redundant if using #3 above).
 
 ### License
 
