@@ -21,4 +21,11 @@ Further discussion of Keyshanc will be found on my blog at [Andrew C. Reed](http
 Keyshanc is licensed under the MIT License (see LICENSE.txt).
 
 If you use it, or just think that it is a worthwhile effort, please +1 and Tweet it via my [projects](http://andrewcreed.com/projects.html) page. If it is used in any research, please email me, as well. Thanks!
+
+### Installing Crypto++ on Ubuntu and Linking in Code::Blocks
+
+1. apt-cache pkgnames | grep -i crypto++
+2. sudo apt-get install libcrypto++9 libcrypto++9-dbg libcrypto++-dev
+3. Code::Blocks "Project > Build Options > Linker Settings > /usr/lib/libcryptopp.so"
+
  
