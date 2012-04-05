@@ -27,6 +27,7 @@ SOFTWARE.
 #include <bitset>
 //The following library can be found at http://www.cryptopp.com
 #include "cryptopp/sha.h"
+#include "cryptopp/hex.h"
 
 
 /* SHA256 & SHA512
@@ -44,7 +45,12 @@ std::string SHA256(std::string data)
 
     CryptoPP::SHA256().CalculateDigest(abDigest, pbData, nDataLen);
 
-    return std::string((char*)abDigest);
+    CryptoPP::HexEncoder encoder;
+    std::string output;
+    encoder.Attach( new CryptoPP::StringSink( output ) );
+    encoder.Put( abDigest, sizeof(abDigest) );
+    encoder.MessageEnd();
+    return output;
 }
 
 std::string SHA512(std::string data)
@@ -55,7 +61,12 @@ std::string SHA512(std::string data)
 
     CryptoPP::SHA512().CalculateDigest(abDigest, pbData, nDataLen);
 
-    return std::string((char*)abDigest);
+    CryptoPP::HexEncoder encoder;
+    std::string output;
+    encoder.Attach( new CryptoPP::StringSink( output ) );
+    encoder.Put( abDigest, sizeof(abDigest) );
+    encoder.MessageEnd();
+    return output;
 }
 
 //keyshanc() requires that a char array[95] be passed to it
@@ -71,31 +82,110 @@ void keyshanc(char keys[], std::string password)
     }
 
     int shuffleCode[95];
+    std::string hexString = "";
     std::bitset<8> aByte;
     unsigned long numByte;
     //build the first 64 positions in shuffleCode[] with the entire SHA512 hash
     for (int x=0; x < 64; ++x)
     {
-        aByte = std::bitset<8>(i[x]);
+        switch (i[x*2])
+				{
+					case '0': hexString.append ("0000"); break;
+					case '1': hexString.append ("0001"); break;
+					case '2': hexString.append ("0010"); break;
+					case '3': hexString.append ("0011"); break;
+					case '4': hexString.append ("0100"); break;
+					case '5': hexString.append ("0101"); break;
+					case '6': hexString.append ("0110"); break;
+					case '7': hexString.append ("0111"); break;
+					case '8': hexString.append ("1000"); break;
+					case '9': hexString.append ("1001"); break;
+					case 'A': hexString.append ("1010"); break;
+					case 'B': hexString.append ("1011"); break;
+					case 'C': hexString.append ("1100"); break;
+					case 'D': hexString.append ("1101"); break;
+					case 'E': hexString.append ("1110"); break;
+					case 'F': hexString.append ("1111"); break;
+				}
+        switch (i[(x*2)+1])
+				{
+					case '0': hexString.append ("0000"); break;
+					case '1': hexString.append ("0001"); break;
+					case '2': hexString.append ("0010"); break;
+					case '3': hexString.append ("0011"); break;
+					case '4': hexString.append ("0100"); break;
+					case '5': hexString.append ("0101"); break;
+					case '6': hexString.append ("0110"); break;
+					case '7': hexString.append ("0111"); break;
+					case '8': hexString.append ("1000"); break;
+					case '9': hexString.append ("1001"); break;
+					case 'A': hexString.append ("1010"); break;
+					case 'B': hexString.append ("1011"); break;
+					case 'C': hexString.append ("1100"); break;
+					case 'D': hexString.append ("1101"); break;
+					case 'E': hexString.append ("1110"); break;
+					case 'F': hexString.append ("1111"); break;
+				}
+        aByte = std::bitset<8>(hexString);
         numByte = aByte.to_ulong();
         shuffleCode[x] = numByte%95;
+        hexString = "";
     }
 
     //build the last 31 positions in shuffleCode[] with the first 31 bytes of the SHA256 hash
     for (int x=0; x < 31; ++x)
     {
-        aByte = std::bitset<8>(j[x]);
+         switch (j[x*2])
+				{
+					case '0': hexString.append ("0000"); break;
+					case '1': hexString.append ("0001"); break;
+					case '2': hexString.append ("0010"); break;
+					case '3': hexString.append ("0011"); break;
+					case '4': hexString.append ("0100"); break;
+					case '5': hexString.append ("0101"); break;
+					case '6': hexString.append ("0110"); break;
+					case '7': hexString.append ("0111"); break;
+					case '8': hexString.append ("1000"); break;
+					case '9': hexString.append ("1001"); break;
+					case 'A': hexString.append ("1010"); break;
+					case 'B': hexString.append ("1011"); break;
+					case 'C': hexString.append ("1100"); break;
+					case 'D': hexString.append ("1101"); break;
+					case 'E': hexString.append ("1110"); break;
+					case 'F': hexString.append ("1111"); break;
+				}
+        switch (j[(x*2)+1])
+				{
+					case '0': hexString.append ("0000"); break;
+					case '1': hexString.append ("0001"); break;
+					case '2': hexString.append ("0010"); break;
+					case '3': hexString.append ("0011"); break;
+					case '4': hexString.append ("0100"); break;
+					case '5': hexString.append ("0101"); break;
+					case '6': hexString.append ("0110"); break;
+					case '7': hexString.append ("0111"); break;
+					case '8': hexString.append ("1000"); break;
+					case '9': hexString.append ("1001"); break;
+					case 'A': hexString.append ("1010"); break;
+					case 'B': hexString.append ("1011"); break;
+					case 'C': hexString.append ("1100"); break;
+					case 'D': hexString.append ("1101"); break;
+					case 'E': hexString.append ("1110"); break;
+					case 'F': hexString.append ("1111"); break;
+				}
+        aByte = std::bitset<8>(hexString);
         numByte = aByte.to_ulong();
         shuffleCode[x+64] = numByte%95;
+        hexString = "";
     }
 
-    /*
+
     //debugging code - display shuffleCode[]
     for (int x=0; x < 95; ++x)
     {
         std::cout << x << " " << shuffleCode[x] << std::endl;
     }
-    */
+
 
     //Shuffle keys[] using shuffleCode[] for swap positions
     for (int x=0; x < 95; ++x)
