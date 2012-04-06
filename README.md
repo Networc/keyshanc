@@ -29,4 +29,12 @@ If you use it, or just think that it is a worthwhile effort, please +1 and Tweet
 2. sudo apt-get install libcrypto++9 libcrypto++9-dbg libcrypto++-dev
 3. Code::Blocks "Project > Build Options > Linker Settings > /usr/lib/libcryptopp.so"
 
+###Additional Notes
+
+Even if you aren't interested in the entire Keyshanc function, you may still find the following pieces useful to your own project:
+
+* The SHA-256 and SHA-512 functions that each take a string as input and return a string of hexadecimal characters
+* The FOR loops (containing the SWITCH statements) that convert the strings of hexadecimal characters into binary
+* The FOR loop that shuffles the keys[] array based on the "swap positions" contained in the shuffleCode[] array
+
  
