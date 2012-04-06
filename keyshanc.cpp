@@ -86,6 +86,10 @@ void keyshanc(char keys[], std::string password)
     std::bitset<8> aByte;
     unsigned long numByte;
     //build the first 64 positions in shuffleCode[] with the entire SHA512 hash
+    /* The switch statements are from
+       "C++ Convert Hex String to Binary String"
+       http://www.cplusplus.com/forum/beginner/41657/
+    */
     for (int x=0; x < 64; ++x)
     {
         switch (i[x*2])
