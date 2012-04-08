@@ -5,6 +5,11 @@ Keyshanc is an algorithm that produces a substitution cipher for the ASCII chara
 
 My Intent: Keyshanc can provide a "good enough" method for privately communicating with applications on computers where the user has no administrative control.
 
+Example Scenarios:
+
+* A business wants to allow its workforce to login remotely to their virtual desktops using their personal computers. Upon login, the user would be presented with a CAPTCHA Keyshanc password that must be entered into the user's Keyshanc (or Keyshanc-enabled keyboard).
+* A user wants/needs to conduct sensitive business on a Keyshanc-enabled website from an untrusted computer. The user would enter his/her Keyshanc password via a graphical keyboard on the website.
+
 My Goal: Wide adoption of Keyshanc in both hardware (specifically keyboards) and software (e.g. web browser add-ons).
 
 Further discussion of Keyshanc will be found on my blog at [Andrew C. Reed](http://andrewcreed.com).
