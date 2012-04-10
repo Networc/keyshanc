@@ -183,13 +183,13 @@ void keyshanc(char keys[], std::string password)
         hexString = "";
     }
 
-
+/*
     //debugging code - display shuffleCode[]
     for (int x=0; x < 95; ++x)
     {
         std::cout << x << " " << shuffleCode[x] << std::endl;
     }
-
+*/
 
     //Shuffle keys[] using shuffleCode[] for swap positions
     for (int x=0; x < 95; ++x)
