@@ -81,7 +81,7 @@ function keyshanc(password) {
 }
 
 function decryptKeyshanc() {
-    s1 = new String(myForm.inText.value);
+    s1 = new String(document.getElementById('inText').value);
 
     var s2 = new String("");
 
@@ -102,5 +102,5 @@ function decryptKeyshanc() {
         }
     }
 
-    myForm.outText.value = s2;
+    document.getElementById('outText').value = s2;
 }
