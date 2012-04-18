@@ -27,6 +27,9 @@ SOFTWARE.
 //NOTE: This script requires sha512-min.js and sha256-min.js
 //Both can be obtained from http://pajhome.org.uk/crypt/md5/jshash-2.2.zip
 
+//ALSO: The dynamicTweet/generateTweet portions require jQuery
+//Available from http://jquery.com
+
 //create keys[95]
 var keys = new Array(95);
 
@@ -34,6 +37,12 @@ var keys = new Array(95);
 for (x = 0; x < 95; x++) {
     keys[x] = (x + 32);
 }
+
+//jQuery code for the Dynamic Tweet button which sends the ciphertext
+//    Place the following DIV in your html where you want the Dynamic Tweet
+//    button to appear
+//    <div id="dynamicTweet"></div>
+$('#dynamicTweet').html('');
 
 function keyshanc(password) {
     var i = new String(hex_sha512(password));
@@ -103,4 +112,29 @@ function decryptKeyshanc() {
     }
 
     document.getElementById('outText').value = s2;
+}
+
+function encryptKeyshanc() {
+    s1 = new String(document.getElementById('inText').value);
+
+    var s2 = new String("");
+
+    for (x = 0; x < s1.length; x++) {
+        if (s1.charCodeAt(x) >= 32 && s1.charCodeAt(x) <= 126)
+        {
+            s2 = s2.concat(String.fromCharCode(keys[((s1.charCodeAt(x))-32)]));
+        }
+        else
+        {
+            s2 = s2.concat(s1.charAt(x));
+        }
+    }
+
+    document.getElementById('outText').value = s2;
+}
+
+function generateTweet(tweetText) {
+    $('#dynamicTweet').html("\
+<iframe allowtransparency='true' frameborder='0' scrolling='no' src='http://platform.twitter.com/widgets/tweet_button.html?text=" + tweetText + "&count=none' style='width:115px; height:21px;'></iframe>\
+<br />");
 }
